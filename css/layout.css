@@ -1,0 +1,489 @@
+@charset "utf-8";
+@import "reset.css";
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap");
+
+/* 비교 : 쌤은 바디에 기본적으로 폰트 설정을 해두심*/
+body {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 16px;
+  line-height: 28px;
+  font-weight: 400;
+  color: #47474f;
+}
+.wrapper {
+  width: 100%;
+  /* 처음부터 overflow:hideen을 쓰면 넓이높이를 가진 공간 이외의 것들은 안보임.
+    페딩영역이나 box-shadow같은것들 */
+  /* overflow: hidden; 자식에 맞춰서 늘어나라 */
+  height: auto;
+}
+/* 비교 : 본인은 헤더 안의 태그들을 한번 더 묶을 수 있는
+   div.header_con을 만들어서 거기에 효과를 나눠버림... */
+header {
+  width: 100%;
+  height: 60px;
+  background-color: #fff;
+  box-shadow: 0px 1px 7px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  padding: 0 24px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  display: flex;
+  column-gap: 24px;
+}
+h1 {
+  width: fit-content;
+  height: fit-content;
+  /* 로고 중앙 정렬 */
+  padding: 15px 0; /* 패딩영역이 header영역을 빠져나갔지만 사람 눈으로 보이는 값이 더 중요함 */
+}
+h1 img {
+  height: 30px;
+}
+#gnb {
+  width: fit-content;
+  height: 100%;
+}
+#gnb > ul {
+  width: fit-content;
+  display: flex;
+  column-gap: 20px;
+  line-height: 60px;
+}
+/* 1차메뉴 */
+#gnb > ul > li {
+  padding: 0 20px;
+  position: relative;
+  text-align: center;
+}
+.sm_3 {
+  /* 비교 : 본인은 사이즈만 줄여놓았음 */
+  display: inline-block; /* span태그는 인라인속성이라 속성바꿔주기 */
+  position: relative; /* 사이즈를 줄이면 아이콘이 밑으로 내려가기 때문에 현재 자리를 기준으로 만들어서 끌어올리기 위해 사용*/
+  font-size: 9px;
+  top: -2px;
+  margin-left: 5px;
+}
+#gnb > ul > li > a {
+  font-size: 14px;
+  font-weight: 700;
+}
+#gnb > ul > li:hover > a {
+  color: #bd060a;
+}
+/* 2차메뉴 (코딩은 항상 협업하는 상황을 전제로 작성하기. */
+/* 비교: 본인은 전부 따로 코드줌... */
+#gnb > ul > li:nth-child(4) > div,
+#gnb > ul > li:last-child > div {
+  background-color: rgb(255, 255, 255);
+  width: 200%;
+  height: 0;
+  overflow: hidden;
+  position: absolute;
+  left: -50px;
+  top: 70px;
+  box-sizing: border-box;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  transition: 0.3s; /* 모습이 변하는 것에서 시간차를 주는 것. 0.3s=0.3초 */
+}
+.submenu {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px 30px;
+  text-align: left;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 50px;
+}
+.submenu > span {
+  color: #707078;
+}
+.submenu > li {
+  padding-left: 40px;
+  position: relative;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+.submenu > li:hover {
+  background-color: #f5f5f5;
+}
+/* a태그 앞에 아이콘 영역 공통설정 */
+.submenu > li > a::before {
+  /* 가상선택자는 컨텐츠 속성이 없으면 아무것도 안나옴 */
+  content: "icons";
+  font-size: 0;
+  display: block;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  left: 10px;
+  top: 15px;
+  background: url(../img/sprite.svg) no-repeat;
+  background-position-x: -5px;
+}
+.submenu > li > a.jpg::before {
+  background-position-y: -180px;
+}
+.submenu > li > a.word::before {
+  background-position-y: -205px;
+}
+.submenu > li > a.power::before {
+  background-position-y: -230px;
+}
+.submenu > li > a.excel::before {
+  background-position-y: -255px;
+}
+.submenu > li > a.htmls::before {
+  background-position-y: -530px;
+}
+.submenu > li > a.merge::before {
+  background-position-y: -5px;
+}
+.submenu > li > a.split::before {
+  background-position-y: -30px;
+}
+.submenu > li > a.remove::before {
+  background-position-y: -55px;
+}
+.submenu > li > a.extract::before {
+  background-position-y: -80px;
+}
+.submenu > li > a.organize::before {
+  background-position-y: -105px;
+}
+.submenu > li > a.scan::before {
+  background-position-y: -680px;
+}
+.submenu > li:hover a {
+  color: #e5322d;
+}
+#gnb > ul > li:nth-child(4):hover > div {
+  height: 320px;
+}
+#gnb > ul > li:last-child:hover > div {
+  height: 370px;
+}
+/* 오른쪽 아이콘 버튼들 */
+.action {
+  width: fit-content;
+  height: 100%;
+  /* 비교: 본인은 따로 플렉스를 줘서 justify-content:end로 끝으로 보냄 */
+  /* 플렉스가 걸렸을 때 왼쪽끝으로 보내기 (플렉스 안걸려있으면 끝으로 안감) */
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+}
+.action > a {
+  display: block;
+  width: 60px;
+  height: 100%;
+  box-sizing: border-box;
+  position: relative;
+}
+.action > a::before {
+  content: "";
+  display: block;
+  background-image: url(../img/sprite.svg);
+  background-repeat: no-repeat;
+}
+.action > a.icon_desk {
+  padding: 16px 14px;
+}
+.action > a.icon_desk::before {
+  width: 32px;
+  height: 28px;
+  background-position: -55px -30px;
+}
+.action > a.icon_desk::after {
+  content: "ilovePDF 데스크톱, 오프라인 작업";
+  /* border-radius를 쓰려면 block속성으로 바꿔줘야함 */
+  display: block;
+  font-size: 14px;
+  width: 230px;
+  line-height: 32px;
+  background-color: #47474f;
+  color: #fff;
+  text-align: center;
+  font-weight: 700;
+  position: absolute;
+  top: 70px;
+  left: -70px;
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.action > a.icon_desk:hover::after {
+  opacity: 1;
+}
+.action > a.icon_login {
+  text-align: center;
+  line-height: 60px;
+  color: #e5322d;
+  font-weight: 500;
+}
+.action > a.icon_login:hover {
+  color: #47474f;
+}
+.action > a.sign_up {
+  box-sizing: content-box; /* box-sizing 해제 */
+  text-align: center;
+  height: 35px;
+  padding: 0 12px;
+  line-height: 35px;
+  font-size: 14px;
+  font-weight: 700;
+  background-color: #bd060a;
+  color: #fff;
+  border-radius: 10px;
+  transition: 0.3;
+}
+.action > a.sign_up:hover {
+  background-color: #6d0406;
+}
+.action > a.menu {
+  padding: 22px 18px;
+}
+.action > a.menu::before {
+  width: 24px;
+  height: 18px;
+  background-position: -55px -5px;
+}
+/* 컨텐츠 영역 */
+main {
+  width: 100%;
+  height: auto;
+  /* 색상 이미지경로 반복여부 배경고정 위치 / 사이즈 */
+  background: #f5f5fa url(../img/background.svg) no-repeat fixed center / cover;
+}
+section {
+  width: 100%;
+  box-sizing: border-box;
+  height: auto;
+}
+.tools {
+  margin-top: 60px;
+  padding: 50px 0;
+  text-align: center;
+}
+.top_title {
+  width: 100%;
+  margin-bottom: 40px;
+}
+.top_title h2 {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.top_title p {
+  font-size: 22px;
+}
+.tools_wrap {
+  padding: 0 68px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.item_con {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 2px;
+}
+.item_con .item {
+  /* calc = 계산기. 소괄호 안에 값을 넣으면 알아서 계산해줌 */
+  /* flex-basis: calc(16.666%-4px); */
+  flex: 1 0 16%;
+  word-wrap: break-word;
+  background-color: #fff;
+  border: 1px solid #f5f5fa;
+  text-align: left;
+  border-radius: 4px;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+.item a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 50px 30px;
+  box-sizing: border-box;
+}
+.item a:hover {
+  background-color: #f5f5fa;
+}
+.item h3 {
+  font-size: 20px;
+  color: #333;
+  font-weight: 600;
+}
+.item h3::before {
+  content: "icons";
+  font-size: 0;
+  display: block;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 30px;
+  background: url(../img/sprite.svg) no-repeat;
+  background-size: 545%;
+  background-position: -11px -11px;
+}
+.item p {
+  font-size: 13px;
+  line-height: 18px;
+  color: #707078;
+  margin-top: 10px;
+}
+/* 두번째 섹션 */
+.solution {
+  background-color: #fff;
+  padding: 100px 0;
+  color: #33333b;
+  text-align: center;
+}
+section > h2 {
+  font-size: 42px;
+  font-weight: 700;
+}
+section > p {
+  line-height: 32px;
+  font-size: 22px;
+  font-weight: 400;
+  color: #47474f;
+}
+.solution_box {
+  width: 1500px;
+  margin: 0 auto;
+  margin-top: 80px;
+  display: flex;
+  column-gap: 30px;
+  text-align: left;
+}
+.solution_box h3 {
+  font-size: 26px;
+  line-height: 30px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.solution_box p {
+  color: #707078;
+  line-height: 28px;
+  font-weight: 400;
+}
+.solution_box a {
+  text-decoration: underline;
+  color: #e5322d;
+  font-weight: 600;
+}
+/* 세번째 섹션 */
+.user {
+  padding: 100px 0;
+  text-align: center;
+}
+.user p {
+  margin-top: 28px;
+  color: #707078;
+}
+.other_logo {
+  width: 500px;
+  margin: 0 auto;
+  margin-top: 80px;
+  display: flex;
+  justify-content: space-between;
+}
+.other_logo > div {
+  height: 30px;
+}
+.other_logo > div > img {
+  max-height: 100%;
+}
+/* 마지막 섹션 */
+.premium {
+  background-color: #47474f;
+  color: #f5f5fa;
+  display: flex;
+  justify-content: space-between;
+  padding: 80px 200px;
+  align-items: center;
+}
+.left {
+  width: 60%;
+}
+.left h2 {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+.left p {
+  line-height: 32px;
+  font-size: 22px;
+  font-weight: 400;
+  margin-bottom: 60px;
+}
+.left a {
+  background-color: gold;
+  font-weight: 700;
+  display: block;
+  width: fit-content;
+  padding: 8px 24px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+.left a:hover {
+  background-color: goldenrod;
+}
+/* footer */
+footer {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 50px 200px;
+  background-color: #f5f5fa;
+}
+.sitemap {
+  /* footer의 패딩영역을 제외한 나머지 부분 */
+  width: 100%;
+  height: fit-content;
+  border-bottom: 1px solid #aaa;
+  margin-bottom: 30px;
+}
+#footer_nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 60px;
+}
+#footer_nav ul {
+  flex: 1 25%;
+  line-height: 1;
+  font-weight: 400;
+}
+#footer_nav ul > h4 {
+  color: #e5322d;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+#footer_nav ul li {
+  margin-bottom: 14px;
+}
+#footer_nav ul li a {
+  color: #707078;
+}
+#footer_nav ul li:hover a {
+  color: #e5322d;
+}
+.btn_wrap {
+  width: 100%;
+  height: 40px;
+  margin: 30px 0;
+}
+.btn_wrap a {
+  float: right;
+  display: block;
+  width: 135px;
+  height: 40px;
+  margin-left: 10px;
+}
